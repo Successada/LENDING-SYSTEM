@@ -1,0 +1,92 @@
+{%extends 'base.html'%}
+{%load static%}
+{% load humanize %}
+{%block content%}
+<a href="/">Back to Home</a> | <a href="{%url 'dashboard'%}">Dashboard</a> | <a href="{%url 'lenders_list'%}">Lender List</a> > Details
+<br/><br/>
+<!--{%if user.account.balance %} Balance ₦{{user.account.balance|intcomma}} {%else%} Balance ₦0 {%endif%}<br/>-->
+    <!-- content start -->
+<a href="{%url 'DeleteLender' lenders.pk%}">Delete</a>
+    <div class="container">
+        <div class="card">
+            <div class="card header">
+                <h2 align="center">Loan Details</h2>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-center text-white md mb-3" id="total-orders">
+                        <div class="card-header">
+                            <h5 class="card-title">Pledged Amount</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title"><b>₦{{lenders.amount|intcomma}}</b></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white md mb-3" id="orders-delivered">
+                    <div class="card-header">
+                        <h5 class="card-title">Interest Rate</h5>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title"><b>{{lenders.percentage}}%</b></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white md mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Total Payback</h5>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title"><b>₦{{lenders.total_all|intcomma}}</b></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="col-md">
+                            <div class="card text-center text-white md mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title">Duration</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title"><b>{%if duration == 1%}{{lenders.duration}} Month {%else%}{{lenders.duration}} Months{%endif%}</b></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 align="center">Condition</h5>
+            </div>
+            <div class="card-body">
+                <h3>{{lenders.conditions|safe|urlize}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <button class="btn btn-default btn-block">Apply Now</button>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <!-- /.content end -->
+<br/><br/>
+{%endblock%}
